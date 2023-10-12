@@ -1,0 +1,41 @@
+version: "3.9"
+
+services:
+    blogapp:
+        container_name: blogapp
+        image: sasacrow/blogapp:1.0.1
+        build: .
+        ports:
+            - "8000:8000"
+        env_file:
+            - .env
+        depends_on:
+            - blogdb
+
+    blogdb:
+        container_name: blogdb
+        image: mysql:8
+        ports:
+            - "3306:3306"
+        environment:
+            MYSQL_ROOT_PASSWORD: root
+            MYSQL_USER: admin
+            MYSQL_PASSWORD: admin
+            MYSQL_DB: blogdb
+        volumes:
+            - mysqldata:/var/lib/mysql
+
+    phpmyadmin3:
+        container_name: phpmyadmin3
+        image: phpmyadmin/phpmyadmin
+        ports:
+            - "8081:80"
+        environment:
+            PMA_HOST: blogdb # Use the name of your MySQL service (defined in this file) as the host
+            PMA_PORT: 3306
+            MYSQL_ROOT_PASSWORD: root
+            MYSQL_USER: admin
+            MYSQL_PASSWORD: admin
+
+volumes:
+    mysqldata: {}
