@@ -21,3 +21,5 @@ Route::get('/services', [PagesController::class, 'services']);
 
 // all the routes for posts 
 Route::resource('posts', PostsController::class);
+
+Route::get('/posts', [PostsController::class, 'index']);

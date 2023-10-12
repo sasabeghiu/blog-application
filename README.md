@@ -10,7 +10,8 @@ This is a blog application fully written in Laravel.
 
 `docker compose up -d blogdb` <br />
 `docker compose up -d phpmyadmin3`<br />
-`docker compose up --build blogapp`
+`docker compose up -d --build blogapp`<br />
+`docker-compose-watch`
 
 ## Access database
 

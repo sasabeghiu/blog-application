@@ -3,7 +3,7 @@ version: "3.9"
 services:
     blogapp:
         container_name: blogapp
-        image: sasacrow/blogapp:1.0.1
+        image: sasacrow/blogapp:1.0.3
         build: .
         ports:
             - "8000:8000"
@@ -11,6 +11,10 @@ services:
             - .env
         depends_on:
             - blogdb
+        volumes:
+            - .:/var/www/html # Mount the current directory into the container
+        networks:
+            - blogapp-network
 
     blogdb:
         container_name: blogdb
@@ -24,6 +28,8 @@ services:
             MYSQL_DB: blogdb
         volumes:
             - mysqldata:/var/lib/mysql
+        networks:
+            - blogapp-network
 
     phpmyadmin3:
         container_name: phpmyadmin3
@@ -36,6 +42,11 @@ services:
             MYSQL_ROOT_PASSWORD: root
             MYSQL_USER: admin
             MYSQL_PASSWORD: admin
+        networks:
+            - blogapp-network
 
 volumes:
     mysqldata: {}
+
+networks:
+    blogapp-network:
