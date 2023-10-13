@@ -2,16 +2,6 @@
 
 @section('content')
     <h1>Create a Post</h1>
-    <style>
-        /* Adjust the CKEditor textarea size */
-        #editor {
-            min-height: 300px;
-        }
-
-        .ck.ck-content {
-            min-height: 300px;
-        }
-    </style>
     {!! Form::open(['action' => 'App\Http\Controllers\PostsController@store', 'method' => 'POST']) !!}
     <div class="form-group">
         {{ Form::label('title', 'Title') }}
