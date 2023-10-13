@@ -23,3 +23,7 @@ Route::get('/services', [PagesController::class, 'services']);
 Route::resource('posts', PostsController::class);
 
 Route::get('/posts', [PostsController::class, 'index']);
+
+Auth::routes();
+
+Route::get('/dashboard', [App\Http\Controllers\DashboardController::class, 'index']);
