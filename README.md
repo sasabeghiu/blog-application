@@ -6,12 +6,14 @@ This is a blog application fully written in Laravel.
 
 ## run project:
 
+`docker compose up -d` <br />
+`docker-compose-watch`
+
 ## Docker compose
 
 `docker compose up -d blogdb` <br />
 `docker compose up -d phpmyadmin3`<br />
 `docker compose up -d --build blogapp`<br />
-`docker-compose-watch`
 
 ## Access database
 
@@ -33,4 +35,3 @@ This is a blog application fully written in Laravel.
 ## Remove containers
 
 `docker compose down -v`
-
