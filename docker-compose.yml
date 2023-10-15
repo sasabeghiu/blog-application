@@ -3,7 +3,7 @@ version: "3.9"
 services:
     blogapp:
         container_name: blogapp
-        image: sasacrow/blogapp:1.0.3
+        image: sasacrow/blogapp:1.0.4
         build: .
         ports:
             - "8000:8000"
@@ -13,6 +13,7 @@ services:
             - blogdb
         volumes:
             - .:/var/www/html # Mount the current directory into the container
+            - /var/www/html/storage
         networks:
             - blogapp-network
 
