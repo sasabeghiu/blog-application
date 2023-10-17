@@ -15,6 +15,7 @@ class PostsController extends Controller
      */
     public function __construct()
     {
+        //only allow authenticated users to create, edit, update and delete posts
         $this->middleware('auth', ['except' => ['index', 'show']]);
     }
 
@@ -23,6 +24,7 @@ class PostsController extends Controller
      */
     public function index()
     {
+        //get all posts from the database with pagination and ordering by last created
         $posts = Post::orderBy('created_at', 'desc')->paginate(5);
         return view('posts.index')->with('posts', $posts);
     }
@@ -40,6 +42,7 @@ class PostsController extends Controller
      */
     public function store(Request $request)
     {
+        //validate input
         $this->validate($request, [
             'title' => 'required',
             'body'  => 'required',
@@ -68,6 +71,7 @@ class PostsController extends Controller
         $post = new Post();
         $post->title = $request->input('title');
         $post->body = $request->input('body');
+        //set user_id to the current user
         $post->user_id = auth()->user()->id;
         $post->cover_image = $fileNameToStore;
         $post->save();
@@ -104,6 +108,7 @@ class PostsController extends Controller
      */
     public function update(Request $request, string $id)
     {
+        //validate input
         $this->validate($request, [
             'title' => 'required',
             'body'  => 'required'
@@ -129,7 +134,10 @@ class PostsController extends Controller
         $post = Post::find($id);
         $post->title = $request->input('title');
         $post->body  = $request->input('body');
+
+        //check if post already has a image, if not set it to the new image
         if ($request->hasFile('cover_image')) {
+            //if post already has a image, delete it
             if ($post->cover_image != 'noimage.jpg') {
                 Storage::delete('public/cover_images/' . $post->cover_image);
             }
@@ -152,8 +160,8 @@ class PostsController extends Controller
             return redirect('/posts')->with('error', 'Unauthorized Page');
         }
 
+        // Delete Image if it exists
         if ($post->cover_image != 'noimage.jpg') {
-            // Delete Image
             Storage::delete('public/cover_images/' . $post->cover_image);
         }
 
