@@ -2,7 +2,7 @@
 
 # blog-application
 
-This is a blog application fully written in Laravel. Will be hosted.
+This is a blog application fully written in Laravel.
 
 ## run project:
 
