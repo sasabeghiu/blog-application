@@ -3,6 +3,8 @@
 # blog-application
 
 This is a blog application fully written in Laravel.
+The website is hosted on https://blogapplication-laravel.000webhostapp.com/
+There is a problem with the images because of unability to create a symlink due to free hosting.
 
 ## run project:
 
